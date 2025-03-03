@@ -1,0 +1,49 @@
+/* Style de la sidebar */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar ul {
+  margin-top: 20px;
+}
+
+.sidebar li {
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  background: #f3f4f6;
+}
+
+/* Style des cartes de statistiques */
+.stat-card {
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Couleurs des cartes */
+.bg-blue { background: #3B82F6; }
+.bg-red { background: #EF4444; }
+.bg-green { background: #10B981; }
+.bg-yellow { background: #F59E0B; }
+
+/* Contenu principal */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background: #F9FAFB;
+  height: 100vh;
+  overflow-y: auto;
+}
