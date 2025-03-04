@@ -1,18 +1,20 @@
-import { Component, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {MyFirstCompComponent} from './my-first-comp/my-first-comp.component';
+import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from '../app/services/keycloak/keycloak.service';
+import {LeadsTableComponent} from './components/leads-table-component/leads-table-component.component'; // Importer le service Keycloak
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   imports: [
-    DashboardComponent,
-    MyFirstCompComponent
+    LeadsTableComponent
   ],
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  //title = 'Application de gestion-carriere';
+export class AppComponent implements OnInit {
 
+  constructor(private keycloakService: KeycloakService) {}
+
+  ngOnInit() {
+    this.keycloakService.init(); // Appeler la méthode d'initialisation lors du démarrage
+  }
 }

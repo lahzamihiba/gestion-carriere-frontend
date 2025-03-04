@@ -1,24 +1,15 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { provideKeycloak } from 'keycloak-angular';
-
+import { KeycloakService } from '../src/app/services/keycloak/keycloak.service'; // Importer le service Keycloak
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { importProvidersFrom } from '@angular/core';
-
+import {HttpClient, provideHttpClient} from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideKeycloak({
-      config: {
-        url: 'http://localhost:8080',  // Adresse de ton serveur Keycloak
-        realm: 'gestion-carriere',      // Remplace par ton realm
-        clientId: 'bsn',     // Remplace par ton client-id
-      },
-      initOptions: {
-        onLoad: 'login-required',       // Redirige automatiquement vers la page de login
-        checkLoginIframe: false
-      },
-    }),
-    importProvidersFrom(NgxChartsModule) // Ajoute NgxChartsModule
+    HttpClient,
+    provideHttpClient(),
+    KeycloakService, // Ajouter le service Keycloak
+    importProvidersFrom(NgxChartsModule), // Ajoute NgxChartsModule si nécessaire
   ]
 }).catch((err) => console.error(err));
