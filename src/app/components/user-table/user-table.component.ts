@@ -12,7 +12,7 @@ import { MatHeaderRowDef, MatRowDef } from '@angular/material/table';
   ],
 })
 export class UsersTableComponent implements OnInit {
-  displayedColumns: string[] = ['Username', 'email', 'firstName', 'lastName'];
+  displayedColumns: string[] = ['username', 'email', 'firstName', 'lastName'];
   dataSource = new MatTableDataSource<UserProfile>([]);
 
   //dataSource: any[] = [];
@@ -26,7 +26,10 @@ export class UsersTableComponent implements OnInit {
   loadUsers() {
     this.userService.getUsers().subscribe({
       next: (users) => {
-        console.log("Données chargées:", users); // Vérifier les données
+        console.log("Données chargées:", users);
+        if (users.length > 0) {
+          console.log("Structure d'un utilisateur:", users[0]);
+        }
         this.dataSource.data = users;
       },
       error: (error) => {
@@ -34,4 +37,5 @@ export class UsersTableComponent implements OnInit {
       }
     });
   }
+
 }

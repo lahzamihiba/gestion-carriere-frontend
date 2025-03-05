@@ -28,7 +28,7 @@ export class KeycloakService {
     return this._profile;
   }
 //initialisation des doonées
-  async init() {
+ /* async init() {
     console.log('Authentication');
     const authenticated = await this.keycloak?.init({
       onLoad: 'login-required'
@@ -42,7 +42,31 @@ export class KeycloakService {
     } else {
       console.error("Échec d'authentification !");
     }
+  }*/
+  async init() {
+    console.log('🔄 Initialisation de Keycloak...');
+    const authenticated = await this.keycloak?.init({
+      onLoad: 'login-required'
+    });
+
+    if (authenticated) {
+      console.log("✅ Utilisateur authentifié !");
+
+      // Charger le profil utilisateur
+      this._profile = await this.keycloak.loadUserProfile() as UserProfile;
+
+      // Récupérer le token
+      const token = this.keycloak.token;
+      if (!token) {
+        console.error("⚠️ Aucun token trouvé !");
+      } else {
+        console.log("🔑 Token Keycloak chargé:", token);
+      }
+    } else {
+      console.error("❌ Échec d'authentification !");
+    }
   }
+
 
 
   login() {
@@ -56,5 +80,21 @@ export class KeycloakService {
   isAuthenticated(): boolean {
     return this.keycloak?.authenticated ?? false;
   }
+
+  async getToken(): Promise<string | undefined> {
+    if (!this.keycloak) {
+      console.error("⚠️ Keycloak non initialisé !");
+      return undefined;
+    }
+
+    try {
+      await this.keycloak.updateToken(30); // Rafraîchit si le token expire dans moins de 30s
+      return this.keycloak.token;
+    } catch (error) {
+      console.error("❌ Impossible de rafraîchir le token:", error);
+      return undefined;
+    }
+  }
+
 
 }

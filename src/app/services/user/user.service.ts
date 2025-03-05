@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {KeycloakService} from '../keycloak/keycloak.service';
 import {Lead} from '../lead.service';
@@ -14,10 +14,19 @@ export class UserService {
   //constructor(private http: HttpClient) {}
   constructor(private http: HttpClient, private keycloakService: KeycloakService) {}
 
+
   getUsers(): Observable<UserProfile[]> {
-    const token = this.keycloakService.keycloak.token;
+    const token = this.keycloakService.getToken().then(token => {
+      if (!token) {
+        console.error("❌ Aucun token disponible !");
+      } else {
+        console.log("🔑 Token utilisé pour l'API:", token);
+      }
+    });
+
 
     console.log("Token Keycloak utilisé pour l'API:", token);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.get<UserProfile[]>(this.apiUrl, {
       headers: {
