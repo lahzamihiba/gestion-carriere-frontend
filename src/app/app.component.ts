@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from '../app/services/keycloak/keycloak.service';
-import {LeadsTableComponent} from './components/leads-table-component/leads-table-component.component'; // Importer le service Keycloak
+import {UsersTableComponent} from './components/user-table/user-table.component'; // Importer le service Keycloak
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   imports: [
-    LeadsTableComponent
+    UsersTableComponent
   ],
   styleUrls: ['./app.component.css']
 })

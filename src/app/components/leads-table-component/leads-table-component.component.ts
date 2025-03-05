@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTable, MatTableDataSource} from '@angular/material/table';
 import { LeadService, Lead } from '../../services/lead.service';
+import {UserService} from '../../services/user/user.service';
 
 @Component({
   selector: 'app-leads-table',
@@ -14,15 +15,15 @@ export class LeadsTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'company', 'phone', 'email', 'addedBy', 'list'];
   dataSource = new MatTableDataSource<Lead>([]);
 
-  constructor(private leadService: LeadService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.loadLeads();
+    this.loadUsers();
   }
 
-  loadLeads() {
-    this.leadService.getLeads().subscribe({
-      next: (leads) => {
+  loadUsers() {
+    this..getUsers().subscribe({
+      next: () => {
         this.dataSource.data = leads;
       },
       error: (error) => {

@@ -7,9 +7,10 @@ import {HttpClient, provideHttpClient} from '@angular/common/http';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    HttpClient,
-    provideHttpClient(),
+     provideHttpClient(),
     KeycloakService, // Ajouter le service Keycloak
-    importProvidersFrom(NgxChartsModule), // Ajoute NgxChartsModule si nécessaire
+    importProvidersFrom(NgxChartsModule),
+    // Ajoute NgxChartsModule si nécessaire
+
   ]
 }).catch((err) => console.error(err));

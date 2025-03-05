@@ -28,20 +28,22 @@ export class KeycloakService {
     return this._profile;
   }
 //initialisation des doonées
-  async init(){
-    console.log('Authentication')
-     const authenticated=await this.keycloak?.init(
-       {
-         onLoad:'login-required'
-       }
-     );
+  async init() {
+    console.log('Authentication');
+    const authenticated = await this.keycloak?.init({
+      onLoad: 'login-required'
+    });
 
-    if(authenticated){
-      this._profile=(await this.keycloak.loadUserProfile())as UserProfile;
-      this._profile.token=this.keycloak?.token;
-
+    if (authenticated) {
+      console.log("Utilisateur authentifié !");
+      this._profile = await this.keycloak.loadUserProfile() as UserProfile;
+      this._profile.token = this.keycloak?.token;
+      console.log("Token Keycloak chargé:", this._profile.token);
+    } else {
+      console.error("Échec d'authentification !");
     }
   }
+
 
   login() {
     this.keycloak?.login();

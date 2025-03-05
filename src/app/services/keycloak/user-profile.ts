@@ -1,9 +1,7 @@
-//modele pour gerer les information de keycloak
-
-export interface UserProfile{
-    username?:String;
-    email?:String;
-    firstName?:String;
-    lastName?:String;
-    token?:String;
+export interface UserProfile {
+  Username?: string;  // Nom d'utilisateur, facultatif
+  email?: string;     // Email de l'utilisateur, facultatif
+  firstName?: string; // Prénom de l'utilisateur, facultatif
+  lastName?: string;  // Nom de famille de l'utilisateur, facultatif
+  token?: string;     // Jeton d'authentification, facultatif
 }
